@@ -1,0 +1,6 @@
+.venv/
+.env/
+draft.ipynb
+trash.txt
+data/
+
