@@ -1,7 +1,8 @@
 import os, re
 import pandas as pd
 
-from data_processing import load_data
+from data_processing import load_fashion_mnist, data_prepreocessing 
+      
 
 
 
