@@ -16,7 +16,6 @@ CLASS_NAMES = {
 }
 
 def label_encoding(y: np.ndarray) -> np.ndarray:
-    """Converts numerical labels to their corresponding class names."""
     return np.array([CLASS_NAMES[label] for label in y])
 
 
