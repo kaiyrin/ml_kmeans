@@ -1,4 +1,5 @@
 import os, re
+import pandas as pd
 import numpy as np
 from tensorflow.keras.datasets import fashion_mnist #used only for datset loading
 
@@ -32,6 +33,11 @@ def load_fashion_mnist():
     X_sampled = X[chosen_indices]
     y_sampled = y[chosen_indices]
     return X_sampled, y_sampled
+def load_synthetic_circle_data():
+    df = np.loadtxt("data/circles.txt", delimiter=",", skiprows=1)
+    X = df[:, :2]
+    y = df[:, -1]
+    return X, y
 
 def image_preprocessing(X):
     # normalize the pixel values to the range [0, 1]
@@ -40,13 +46,24 @@ def image_preprocessing(X):
     X_normalized = X_flattened.astype('float32') / 255.0 #normilizing to [0, 1]
     return X_normalized
     
-
+def synthetic_data_preprocessing(X):
+    # normalize the pixel values to the range [0, 1]
+    X_normalized = X.astype('float32') / np.max(X) #normilizing to [0, 1]
+    return X_normalized
 
 if __name__ == "__main__":
-    X, y = load_fashion_mnist()
-    print("Loaded X shape:", X.shape)
-    print(X[:5])
-    print(y[:5])
-    X_processed = image_preprocessing(X)
-    print("Normalised X:", X_processed[:5])
-    print("y:", y[:5])
+    X_mnist, y_mnist = load_fashion_mnist()
+    print("Loaded X shape:", X_mnist.shape)
+    print(X_mnist[:5])
+    print(y_mnist[:5])
+    X_mnist_processed = image_preprocessing(X_mnist)
+    print("Normalised X:", X_mnist_processed[:5])
+    print("y:", y_mnist[:5])
+
+    X_synth, y_synth = load_synthetic_circle_data()
+    print("Loaded X shape:", X_synth.shape)
+    print(X_synth[:5])
+    print(y_synth[:5])
+    X_synth_processed = synthetic_data_preprocessing(X_synth)
+    print("Normalised X:", X_synth_processed[:5])
+    print("y:", y_synth[:5])
