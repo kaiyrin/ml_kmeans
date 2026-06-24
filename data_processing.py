@@ -2,6 +2,23 @@ import os, re
 import numpy as np
 from tensorflow.keras.datasets import fashion_mnist #used only for datset loading
 
+CLASS_NAMES = {
+    0: "T-shirt/top",
+    1: "Trouser",
+    2: "Pullover",
+    3: "Dress",
+    4: "Coat",
+    5: "Sandal",
+    6: "Shirt",
+    7: "Sneaker",
+    8: "Bag",
+    9: "Ankle boot",
+}
+
+def label_encoding(y: np.ndarray) -> np.ndarray:
+    """Converts numerical labels to their corresponding class names."""
+    return np.array([CLASS_NAMES[label] for label in y])
+
 
 def load_fashion_mnist():
     
@@ -19,16 +36,16 @@ def load_fashion_mnist():
 
 def image_preprocessing(X):
     # normalize the pixel values to the range [0, 1]
-    samples, height, width = X.shape[0], X.shape[1], X.shape[2]
+    samples, height, width = X.shape[0], X.shape[1], X.shape[2] #flattening
     X_flattened = X.reshape(samples, height * width)
-    X_normalized = X_flattened.astype('float32') / 255.0
-    
-    
+    X_normalized = X_flattened.astype('float32') / 255.0 #normilizing to [0, 1]
     return X_normalized
+    
 
 
 if __name__ == "__main__":
     X, y = load_fashion_mnist()
+    print("Loaded X shape:", X.shape)
     print(X[:5])
     print(y[:5])
     X_processed = image_preprocessing(X)
