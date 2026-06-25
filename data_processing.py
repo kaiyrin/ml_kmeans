@@ -33,7 +33,7 @@ def load_fashion_mnist():
     X_sampled = X[chosen_indices]
     y_sampled = y[chosen_indices]
     return X_sampled, y_sampled
-def load_synthetic_circle_data():
+def load_synthetic_circle_data(): #just downloaded it lol
     df = np.loadtxt("data/circles.txt", delimiter=",", skiprows=1)
     X = df[:, :2]
     y = df[:, -1]
@@ -47,7 +47,6 @@ def image_preprocessing(X):
     return X_normalized
     
 def synthetic_data_preprocessing(X):
-    # normalize the pixel values to the range [0, 1]
     X_normalized = X.astype('float32') / np.max(X) #normilizing to [0, 1]
     return X_normalized
 
