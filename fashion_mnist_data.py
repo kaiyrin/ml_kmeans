@@ -1,7 +1,9 @@
 import os, re
 import pandas as pd
 import numpy as np
-from tensorflow.keras.datasets import fashion_mnist #used only for datset loading
+from tensorflow.keras.datasets import fashion_mnist
+
+from datasets import scale_pixels #used only for datset loading
 
 CLASS_NAMES = {
     0: "T-shirt/top",
@@ -32,6 +34,7 @@ def load_fashion_mnist():
 
     X_sampled = X[chosen_indices]
     y_sampled = y[chosen_indices]
+    X_sampled = scale_pixels(X_sampled)
     return X_sampled, y_sampled
 def load_synthetic_circle_data(): #just downloaded it lol
     df = np.loadtxt("data/circles.txt", delimiter=",", skiprows=1)
