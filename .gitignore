@@ -6,4 +6,6 @@ data/
 __pychache__/
 __inint__.py
 visualization/
+.DS_Store
+__pycache__/
 
